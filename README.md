@@ -12,5 +12,3 @@ Conheça os membros da equipe que contribuíram para este projeto:
 ### Paulo Pereira Marques
 
 ### Lucas Santiago
-
-## Instruções
