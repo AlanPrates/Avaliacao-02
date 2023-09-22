@@ -1,18 +1,20 @@
-//Atividade Grupo
+// Atividade avaliativa em grupo
 #include <iostream>
 #include <vector>
 #include <ctime>
 
 using namespace std;
 
-class Passageiro {
+class Passageiro
+{
 public:
     string CPF;
     string Nome;
     string DtNascimento;
 };
 
-class Roteiro {
+class Roteiro
+{
 public:
     int Codigo;
     string Data_Horaprevista;
@@ -21,14 +23,16 @@ public:
     string Destino;
 };
 
-class Embarque {
+class Embarque
+{
 public:
     bool Realizado;
     string Data_Hora;
     int Duracao;
-    Passageiro* passageiro;
-    Roteiro* roteiro;
-    struct Ocorrencia {
+    Passageiro *passageiro;
+    Roteiro *roteiro;
+    struct Ocorrencia
+    {
         string Descricao;
         string Data_Hora;
         int Num_Apolice;
@@ -39,7 +43,8 @@ vector<Passageiro> passageiros;
 vector<Roteiro> roteiros;
 vector<Embarque> embarques;
 
-void IncluirPassageiro() {
+void IncluirPassageiro()
+{
     Passageiro novoPassageiro;
     cout << "Digite o CPF do Passageiro: ";
     cin >> novoPassageiro.CPF;
@@ -53,14 +58,17 @@ void IncluirPassageiro() {
     cout << "Passageiro cadastrado com sucesso.\n";
 }
 
-void ListarPassageiros() {
+void ListarPassageiros()
+{
     cout << "Lista de Passageiros:\n";
-    for (const Passageiro& p : passageiros) {
+    for (const Passageiro &p : passageiros)
+    {
         cout << "CPF: " << p.CPF << ", Nome: " << p.Nome << ", Data de Nascimento: " << p.DtNascimento << "\n";
     }
 }
 
-void IncluirRoteiro() {
+void IncluirRoteiro()
+{
     Roteiro novoRoteiro;
     cout << "Digite o Código do Roteiro: ";
     cin >> novoRoteiro.Codigo;
@@ -79,14 +87,17 @@ void IncluirRoteiro() {
     cout << "Roteiro cadastrado com sucesso.\n";
 }
 
-void ListarRoteiros() {
+void ListarRoteiros()
+{
     cout << "Lista de Roteiros:\n";
-    for (const Roteiro& r : roteiros) {
+    for (const Roteiro &r : roteiros)
+    {
         cout << "Código: " << r.Codigo << ", Data/Hora Prevista: " << r.Data_Horaprevista << ", Duração Prevista: " << r.Duracao_prevista << " minutos, Origem: " << r.Origem << ", Destino: " << r.Destino << "\n";
     }
 }
 
-void IncluirEmbarque() {
+void IncluirEmbarque()
+{
     string cpf;
     int codigo;
 
@@ -94,14 +105,17 @@ void IncluirEmbarque() {
     cin >> cpf;
 
     bool passageiroEncontrado = false;
-    for (Passageiro& p : passageiros) {
-        if (p.CPF == cpf) {
+    for (Passageiro &p : passageiros)
+    {
+        if (p.CPF == cpf)
+        {
             passageiroEncontrado = true;
             break;
         }
     }
 
-    if (!passageiroEncontrado) {
+    if (!passageiroEncontrado)
+    {
         cout << "CPF não encontrado. Embarque cancelado.\n";
         return;
     }
@@ -110,14 +124,17 @@ void IncluirEmbarque() {
     cin >> codigo;
 
     bool roteiroEncontrado = false;
-    for (Roteiro& r : roteiros) {
-        if (r.Codigo == codigo) {
+    for (Roteiro &r : roteiros)
+    {
+        if (r.Codigo == codigo)
+        {
             roteiroEncontrado = true;
             break;
         }
     }
 
-    if (!roteiroEncontrado) {
+    if (!roteiroEncontrado)
+    {
         cout << "Código do Roteiro não encontrado. Embarque cancelado.\n";
         return;
     }
@@ -136,15 +153,18 @@ void IncluirEmbarque() {
     cout << "Embarque registrado com sucesso.\n";
 }
 
-void ExcluirEmbarque() {
+void ExcluirEmbarque()
+{
     int codigo;
 
     cout << "Digite o Código do Roteiro: ";
     cin >> codigo;
 
     cout << "Passageiros embarcados no roteiro " << codigo << ":\n";
-    for (const Embarque& e : embarques) {
-        if (e.roteiro->Codigo == codigo) {
+    for (const Embarque &e : embarques)
+    {
+        if (e.roteiro->Codigo == codigo)
+        {
             cout << "CPF: " << e.passageiro->CPF << ", Nome: " << e.passageiro->Nome << "\n";
         }
     }
@@ -153,8 +173,10 @@ void ExcluirEmbarque() {
     cout << "Digite o CPF do passageiro que não embarcará: ";
     cin >> cpf;
 
-    for (auto it = embarques.begin(); it != embarques.end(); ++it) {
-        if (it->roteiro->Codigo == codigo && it->passageiro->CPF == cpf) {
+    for (auto it = embarques.begin(); it != embarques.end(); ++it)
+    {
+        if (it->roteiro->Codigo == codigo && it->passageiro->CPF == cpf)
+        {
             embarques.erase(it);
             cout << "Embarque excluído com sucesso.\n";
             return;
@@ -164,15 +186,18 @@ void ExcluirEmbarque() {
     cout << "Embarque não encontrado.\n";
 }
 
-void AlterarEmbarque() {
+void AlterarEmbarque()
+{
     int codigo;
 
     cout << "Digite o Código do Roteiro: ";
     cin >> codigo;
 
     cout << "Passageiros embarcados no roteiro " << codigo << ":\n";
-    for (Embarque& e : embarques) {
-        if (e.roteiro->Codigo == codigo) {
+    for (Embarque &e : embarques)
+    {
+        if (e.roteiro->Codigo == codigo)
+        {
             cout << "CPF: " << e.passageiro->CPF << ", Nome: " << e.passageiro->Nome << "\n";
         }
     }
@@ -181,8 +206,10 @@ void AlterarEmbarque() {
     cout << "Digite o CPF do passageiro: ";
     cin >> cpf;
 
-    for (Embarque& e : embarques) {
-        if (e.roteiro->Codigo == codigo && e.passageiro->CPF == cpf) {
+    for (Embarque &e : embarques)
+    {
+        if (e.roteiro->Codigo == codigo && e.passageiro->CPF == cpf)
+        {
             int novaDuracao;
             cout << "Digite a nova duração do Embarque (em minutos): ";
             cin >> novaDuracao;
@@ -195,14 +222,17 @@ void AlterarEmbarque() {
     cout << "Embarque não encontrado.\n";
 }
 
-void ListarEmbarques() {
+void ListarEmbarques()
+{
     cout << "Lista de Embarques:\n";
-    for (const Embarque& e : embarques) {
+    for (const Embarque &e : embarques)
+    {
         cout << "Passageiro: " << e.passageiro->Nome << ", Roteiro: " << e.roteiro->Codigo << ", Realizado: " << (e.Realizado ? "Sim" : "Não") << ", Data/Hora: " << e.Data_Hora << ", Duração: " << e.Duracao << " minutos\n";
     }
 }
 
-void IncluirOcorrencia() {
+void IncluirOcorrencia()
+{
     string cpf;
     int codigo;
 
@@ -210,14 +240,17 @@ void IncluirOcorrencia() {
     cin >> cpf;
 
     bool passageiroEncontrado = false;
-    for (Passageiro& p : passageiros) {
-        if (p.CPF == cpf) {
+    for (Passageiro &p : passageiros)
+    {
+        if (p.CPF == cpf)
+        {
             passageiroEncontrado = true;
             break;
         }
     }
 
-    if (!passageiroEncontrado) {
+    if (!passageiroEncontrado)
+    {
         cout << "CPF não encontrado. Inclusão de ocorrência cancelada.\n";
         return;
     }
@@ -226,20 +259,25 @@ void IncluirOcorrencia() {
     cin >> codigo;
 
     bool roteiroEncontrado = false;
-    for (Roteiro& r : roteiros) {
-        if (r.Codigo == codigo) {
+    for (Roteiro &r : roteiros)
+    {
+        if (r.Codigo == codigo)
+        {
             roteiroEncontrado = true;
             break;
         }
     }
 
-    if (!roteiroEncontrado) {
+    if (!roteiroEncontrado)
+    {
         cout << "Código do Roteiro não encontrado. Inclusão de ocorrência cancelada.\n";
         return;
     }
 
-    for (Embarque& e : embarques) {
-        if (e.passageiro->CPF == cpf && e.roteiro->Codigo == codigo) {
+    for (Embarque &e : embarques)
+    {
+        if (e.passageiro->CPF == cpf && e.roteiro->Codigo == codigo)
+        {
             cin.ignore(); // Limpa o buffer de entrada
             cout << "Digite a Descrição da Ocorrência: ";
             getline(cin, e.ocorrencia.Descricao);
@@ -256,7 +294,8 @@ void IncluirOcorrencia() {
     cout << "Embarque não encontrado para registrar a ocorrência.\n";
 }
 
-void ExcluirOcorrencia() {
+void ExcluirOcorrencia()
+{
     string cpf;
     int codigo;
 
@@ -264,14 +303,17 @@ void ExcluirOcorrencia() {
     cin >> cpf;
 
     bool passageiroEncontrado = false;
-    for (Passageiro& p : passageiros) {
-        if (p.CPF == cpf) {
+    for (Passageiro &p : passageiros)
+    {
+        if (p.CPF == cpf)
+        {
             passageiroEncontrado = true;
             break;
         }
     }
 
-    if (!passageiroEncontrado) {
+    if (!passageiroEncontrado)
+    {
         cout << "CPF não encontrado. Exclusão de ocorrência cancelada.\n";
         return;
     }
@@ -280,20 +322,25 @@ void ExcluirOcorrencia() {
     cin >> codigo;
 
     bool roteiroEncontrado = false;
-    for (Roteiro& r : roteiros) {
-        if (r.Codigo == codigo) {
+    for (Roteiro &r : roteiros)
+    {
+        if (r.Codigo == codigo)
+        {
             roteiroEncontrado = true;
             break;
         }
     }
 
-    if (!roteiroEncontrado) {
+    if (!roteiroEncontrado)
+    {
         cout << "Código do Roteiro não encontrado. Exclusão de ocorrência cancelada.\n";
         return;
     }
 
-    for (Embarque& e : embarques) {
-        if (e.passageiro->CPF == cpf && e.roteiro->Codigo == codigo) {
+    for (Embarque &e : embarques)
+    {
+        if (e.passageiro->CPF == cpf && e.roteiro->Codigo == codigo)
+        {
             e.ocorrencia = {}; // Limpa a ocorrência
             cout << "Ocorrência excluída com sucesso.\n";
             return;
@@ -303,7 +350,8 @@ void ExcluirOcorrencia() {
     cout << "Embarque não encontrado para excluir a ocorrência.\n";
 }
 
-void AlterarOcorrencia() {
+void AlterarOcorrencia()
+{
     string cpf;
     int codigo;
 
@@ -311,14 +359,17 @@ void AlterarOcorrencia() {
     cin >> cpf;
 
     bool passageiroEncontrado = false;
-    for (Passageiro& p : passageiros) {
-        if (p.CPF == cpf) {
+    for (Passageiro &p : passageiros)
+    {
+        if (p.CPF == cpf)
+        {
             passageiroEncontrado = true;
             break;
         }
     }
 
-    if (!passageiroEncontrado) {
+    if (!passageiroEncontrado)
+    {
         cout << "CPF não encontrado. Alteração de ocorrência cancelada.\n";
         return;
     }
@@ -327,27 +378,33 @@ void AlterarOcorrencia() {
     cin >> codigo;
 
     bool roteiroEncontrado = false;
-    for (Roteiro& r : roteiros) {
-        if (r.Codigo == codigo) {
+    for (Roteiro &r : roteiros)
+    {
+        if (r.Codigo == codigo)
+        {
             roteiroEncontrado = true;
             break;
         }
     }
 
-    if (!roteiroEncontrado) {
+    if (!roteiroEncontrado)
+    {
         cout << "Código do Roteiro não encontrado. Alteração de ocorrência cancelada.\n";
         return;
     }
 
-    for (Embarque& e : embarques) {
-        if (e.passageiro->CPF == cpf && e.roteiro->Codigo == codigo) {
-            Embarque::Ocorrencia& ocorrencia = e.ocorrencia;
+    for (Embarque &e : embarques)
+    {
+        if (e.passageiro->CPF == cpf && e.roteiro->Codigo == codigo)
+        {
+            Embarque::Ocorrencia &ocorrencia = e.ocorrencia;
 
             cout << "Descrição atual: " << ocorrencia.Descricao << "\n";
             cout << "Deseja alterar a Descrição? (s/n): ";
             char opcao;
             cin >> opcao;
-            if (opcao == 's' || opcao == 'S') {
+            if (opcao == 's' || opcao == 'S')
+            {
                 cin.ignore(); // Limpa o buffer de entrada
                 cout << "Digite a nova Descrição: ";
                 getline(cin, ocorrencia.Descricao);
@@ -356,7 +413,8 @@ void AlterarOcorrencia() {
             cout << "Data e Hora atual: " << ocorrencia.Data_Hora << "\n";
             cout << "Deseja alterar a Data e Hora? (s/n): ";
             cin >> opcao;
-            if (opcao == 's' || opcao == 'S') {
+            if (opcao == 's' || opcao == 'S')
+            {
                 cout << "Digite a nova Data e Hora (formato dd/mm/yyyy HH:mm): ";
                 cin >> ocorrencia.Data_Hora;
             }
@@ -364,7 +422,8 @@ void AlterarOcorrencia() {
             cout << "Número da Apólice atual: " << ocorrencia.Num_Apolice << "\n";
             cout << "Deseja alterar o Número da Apólice? (s/n): ";
             cin >> opcao;
-            if (opcao == 's' || opcao == 'S') {
+            if (opcao == 's' || opcao == 'S')
+            {
                 cout << "Digite o novo Número da Apólice: ";
                 cin >> ocorrencia.Num_Apolice;
             }
@@ -377,82 +436,135 @@ void AlterarOcorrencia() {
     cout << "Embarque não encontrado para alterar a ocorrência.\n";
 }
 
-void ListarOcorrenciasPorPassageiro() {
+void ListarOcorrenciasPorPassageiro()
+{
     string cpf;
     cout << "Digite o CPF do Passageiro: ";
     cin >> cpf;
 
     bool passageiroEncontrado = false;
-    for (const Embarque& e : embarques) {
-        if (e.passageiro->CPF == cpf && e.ocorrencia.Descricao != "") {
+    for (const Embarque &e : embarques)
+    {
+        if (e.passageiro->CPF == cpf && e.ocorrencia.Descricao != "")
+        {
             passageiroEncontrado = true;
             cout << "Descrição: " << e.ocorrencia.Descricao << ", Data/Hora: " << e.ocorrencia.Data_Hora << ", Número da Apólice: " << e.ocorrencia.Num_Apolice << "\n";
         }
     }
 
-    if (!passageiroEncontrado) {
+    if (!passageiroEncontrado)
+    {
         cout << "Nenhuma ocorrência encontrada para este passageiro.\n";
     }
 }
 
-void ListarOcorrenciasPorRoteiro() {
+void ListarOcorrenciasPorRoteiro()
+{
     int codigo;
     cout << "Digite o Código do Roteiro: ";
     cin >> codigo;
 
     bool roteiroEncontrado = false;
-    for (const Embarque& e : embarques) {
-        if (e.roteiro->Codigo == codigo && e.ocorrencia.Descricao != "") {
+    for (const Embarque &e : embarques)
+    {
+        if (e.roteiro->Codigo == codigo && e.ocorrencia.Descricao != "")
+        {
             roteiroEncontrado = true;
             cout << "Descrição: " << e.ocorrencia.Descricao << ", Data/Hora: " << e.ocorrencia.Data_Hora << ", Número da Apólice: " << e.ocorrencia.Num_Apolice << "\n";
         }
     }
 
-    if (!roteiroEncontrado) {
+    if (!roteiroEncontrado)
+    {
         cout << "Nenhuma ocorrência encontrada para este roteiro.\n";
     }
 }
 
-void GestaoOcorrencias() {
+void RegistrarOcorrênciaPorRoteiro()
+{
+    int codigo;
+
+    cout << "Digite o Código do Roteiro: ";
+    cin >> codigo;
+
+    bool roteiroEncontrado = false;
+    for (Embarque &e : embarques)
+    {
+        if (e.roteiro->Codigo == codigo)
+        {
+            roteiroEncontrado = true;
+
+            Embarque::Ocorrencia novaOcorrencia;
+
+            cin.ignore(); // Limpa o buffer de entrada
+            cout << "Digite a Descrição da Ocorrência: ";
+            getline(cin, novaOcorrencia.Descricao);
+            cout << "Digite a Data e Hora da Ocorrência (formato dd/mm/yyyy HH:mm): ";
+            cin >> novaOcorrencia.Data_Hora;
+            cout << "Digite o Número da Apólice: ";
+            cin >> novaOcorrencia.Num_Apolice;
+
+            e.ocorrencia = novaOcorrencia;
+
+            cout << "Ocorrência registrada com sucesso para o roteiro " << codigo << ".\n";
+        }
+    }
+
+    if (!roteiroEncontrado)
+    {
+        cout << "Nenhum roteiro encontrado com o código fornecido.\n";
+    }
+}
+
+void GestaoOcorrencias()
+{
     int escolha;
-    do {
+    do
+    {
         cout << "\nMenu de Ocorrências:\n";
         cout << "1. Incluir Ocorrência\n";
         cout << "2. Excluir Ocorrência\n";
         cout << "3. Alterar Ocorrência\n";
         cout << "4. Listar Ocorrências por Passageiro\n";
         cout << "5. Listar Ocorrências por Roteiro\n";
+        cout << "6. Registrar Ocorrência por Roteiro\n"; // Nova opção
         cout << "0. Sair\n";
         cout << "Escolha uma opção: ";
         cin >> escolha;
 
-        switch (escolha) {
-            case 1:
-                IncluirOcorrencia();
-                break;
-            case 2:
-                ExcluirOcorrencia();
-                break;
-            case 3:
-                AlterarOcorrencia();
-                break;
-            case 4:
-                ListarOcorrenciasPorPassageiro();
-                break;
-            case 5:
-                ListarOcorrenciasPorRoteiro();
-                break;
-            case 0:
-                break;
-            default:
-                cout << "Opção inválida. Tente novamente.\n";
+        switch (escolha)
+        {
+        case 1:
+            IncluirOcorrencia();
+            break;
+        case 2:
+            ExcluirOcorrencia();
+            break;
+        case 3:
+            AlterarOcorrencia();
+            break;
+        case 4:
+            ListarOcorrenciasPorPassageiro();
+            break;
+        case 5:
+            ListarOcorrenciasPorRoteiro();
+            break;
+        case 6:
+            RegistrarOcorrênciaPorRoteiro(); // Nova opção
+            break;
+        case 0:
+            break;
+        default:
+            cout << "Opção inválida. Tente novamente.\n";
         }
     } while (escolha != 0);
 }
 
-int main() {
+int main()
+{
     int escolha;
-    do {
+    do
+    {
         cout << "\nMenu Inicial:\n";
         cout << "1. Gestão de Passageiros\n";
         cout << "2. Gestão de Roteiros\n";
@@ -462,25 +574,26 @@ int main() {
         cout << "Escolha uma opção: ";
         cin >> escolha;
 
-        switch (escolha) {
-            case 1:
-                IncluirPassageiro();
-                break;
-            case 2:
-                IncluirRoteiro();
-                break;
-            case 3:
-                IncluirEmbarque();
-                break;
-            case 4:
-                GestaoOcorrencias();
-                break;
-            case 0:
-                break;
-            default:
-                cout << "Opção inválida. Tente novamente.\n";
+        switch (escolha)
+        {
+        case 1:
+            IncluirPassageiro();
+            break;
+        case 2:
+            IncluirRoteiro();
+            break;
+        case 3:
+            IncluirEmbarque();
+            break;
+        case 4:
+            GestaoOcorrencias();
+            break;
+        case 0:
+            break;
+        default:
+            cout << "Opção inválida. Tente novamente.\n";
         }
     } while (escolha != 0);
 
     return 0;
-}
+}//Fim 
